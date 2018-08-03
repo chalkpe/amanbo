@@ -1,0 +1,31 @@
+{
+  "name": "amanbo",
+  "version": "1.0.0",
+  "description": "Hearthstone quiz page",
+  "main": "index.html",
+  "scripts": {
+    "test": "eslint src/**/*.{js,vue}",
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "repository": "https://github.com/ChalkPE/amanbo",
+  "author": "Chalk <chalk@chalk.pe>",
+  "license": "MIT",
+  "dependencies": {
+    "vue": "^2.5.17",
+    "vue-hot-reload-api": "^2.3.0",
+    "vue-router": "^3.0.1"
+  },
+  "devDependencies": {
+    "@vue/component-compiler-utils": "^2.1.0",
+    "eslint": "^5.2.0",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-promise": "^3.8.0",
+    "eslint-plugin-standard": "^3.1.0",
+    "eslint-plugin-vue": "^5.0.0-beta.1",
+    "parcel-bundler": "^1.9.7",
+    "vue-template-compiler": "^2.5.17"
+  }
+}
