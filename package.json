@@ -12,8 +12,11 @@
   "author": "Chalk <chalk@chalk.pe>",
   "license": "MIT",
   "dependencies": {
+    "noto-sans-kr": "^0.1.1",
     "vue": "^2.5.17",
+    "vue-antd-ui": "^1.0.1",
     "vue-hot-reload-api": "^2.3.0",
+    "vue-localstorage": "^0.6.2",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
