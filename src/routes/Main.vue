@@ -1,14 +1,21 @@
 <template lang="html">
-  <div v-if="problem" class="problem">
-    <h2>다음 중 {{ problem.question(answer) | eunneun }} 무엇인가요?</h2>
+  <div class="main">
+    <div v-if="problem" class="problem">
+      <h2>다음 중 {{ problem.question(answer) | eunneun }} 무엇인가요?</h2>
 
-    <card-popover
-      v-for="card of problem.choices"
-      :key="card.id" :card="card">
+      <card-popover
+        v-for="card of problem.choices"
+        :key="card.id" :card="card">
 
-      <a-button class="card">{{ problem.criteria(card) }}</a-button>
-    </card-popover>
+        <a-button class="card">{{ problem.display(card) }}</a-button>
+      </card-popover>
+    </div>
 
+    <a-divider />
+
+    <div class="kd">
+      {{ kill }}개 맞음 &middot; {{ death }}개 틀림
+    </div>
   </div>
 </template>
 
@@ -32,7 +39,10 @@ export default {
     return {
       problem: null,
       answerIndex: 0,
-      factory: null
+      factory: null,
+
+      kill: 0,
+      death: 0
     }
   },
 
@@ -49,7 +59,7 @@ export default {
 
   methods: {
     next () {
-      this.problem = this.factory().next().value
+      this.problem = this.factory()
       this.answerIndex = random(count)
     }
   }
