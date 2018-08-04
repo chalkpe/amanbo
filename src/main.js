@@ -1,11 +1,11 @@
 import 'noto-sans-kr'
-import 'vue-antd-ui/dist/antd.css'
+import 'ant-design-vue/dist/antd.css'
 
 import Vue from 'vue'
 import App from './App.vue'
 import routes from './routes'
 
-import Antd from 'vue-antd-ui'
+import Antd from 'ant-design-vue'
 import VueRouter from 'vue-router'
 import VueLocalStorage from 'vue-localstorage'
 
