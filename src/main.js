@@ -1,5 +1,6 @@
 import 'noto-sans-kr'
 import 'ant-design-vue/dist/antd.css'
+import 'babel-polyfill'
 
 import Vue from 'vue'
 import App from './App.vue'

@@ -13,6 +13,8 @@
   "license": "MIT",
   "dependencies": {
     "ant-design-vue": "^1.0.2",
+    "axios": "^0.18.0",
+    "babel-polyfill": "^6.26.0",
     "noto-sans-kr": "^0.1.1",
     "vue": "^2.5.17",
     "vue-hot-reload-api": "^2.3.0",
