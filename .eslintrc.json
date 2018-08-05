@@ -8,6 +8,8 @@
     "vue/max-attributes-per-line": ["error", {
       "singleline": 2,
       "multiline": {"max": 2, "allowFirstLine": false}
-    }]
+    }],
+
+    "vue/html-self-closing": "off"
   }
 }

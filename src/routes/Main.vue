@@ -11,7 +11,7 @@
           <card
             :card="card"
             :hidden="!chosen"
-            :korean="korean" />
+            :korean="korean"></card>
 
           <br>
           <a-button
