@@ -14,9 +14,7 @@
 
     <a-layout-content class="main__content">
       <a-card>
-        <keep-alive>
-          <router-view />
-        </keep-alive>
+        <router-view />
       </a-card>
     </a-layout-content>
 

@@ -8,11 +8,9 @@ import routes from './routes'
 
 import Antd from 'ant-design-vue'
 import VueRouter from 'vue-router'
-import VueLocalStorage from 'vue-localstorage'
 
 Vue.use(Antd)
 Vue.use(VueRouter)
-Vue.use(VueLocalStorage)
 
 const app = new Vue({
   render: h => h(App),

@@ -1,12 +1,15 @@
 export default {
   created () {
-    if (this.sync) this.sync.forEach(s => this.syncLocalStorage(s))
+    if (!this.sync) return
+    this.sync.forEach(k => {
+      this.readLocalStorage(k)
+      this.$watch(k, () => this.writeLocalStorage(k))
+    })
   },
 
   methods: {
-    syncLocalStorage (key) {
+    readLocalStorage (key) {
       this[key] = JSON.parse(localStorage.getItem(key)) || this[key]
-      this.$watch(key, () => this.writeLocalStorage(key), { immediate: true })
     },
 
     writeLocalStorage (key) {

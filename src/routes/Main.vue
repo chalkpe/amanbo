@@ -8,7 +8,11 @@
           v-for="card of problem.choices"
           :key="card.id" class="card">
 
-          <card :card="card" :hidden="!chosen" />
+          <card
+            :card="card"
+            :hidden="!chosen"
+            :korean="korean" />
+
           <br>
           <a-button
             size="large"
@@ -26,7 +30,7 @@
       <a-button
         v-if="!problem"
         type="primary" size="large"
-        @click="next">퀴이즈 시작하기</a-button>
+        @click="next">아! 도전자여, 안녕하십니까.</a-button>
 
       <a-button
         v-if="problem && !chosen"
@@ -39,6 +43,11 @@
         @click="next">
         {{ chosen === answer ? '맞았습니다' : '틀렸습니다' }} <a-icon type="right" />
       </a-button>
+
+      <template v-if="!problem">
+        <br><br>
+        <language-picker />
+      </template>
     </div>
   </div>
 </template>
@@ -51,10 +60,11 @@ import pickOne from '../util/pick-one'
 import postposition from '../util/postposition'
 
 import Card from '../components/Card.vue'
+import LanguagePicker from '../components/LanguagePicker.vue'
 
 export default {
   name: 'MainRoute',
-  components: { Card },
+  components: { Card, LanguagePicker },
   filters: { eunneun: postposition('은는') },
   mixins: [storage],
 
@@ -66,7 +76,8 @@ export default {
       kill: 0,
       death: 0,
       review: [],
-      sync: ['kill', 'death', 'review'],
+      korean: false,
+      sync: ['kill', 'death', 'review', 'korean'],
 
       answer: null,
       chosen: null
