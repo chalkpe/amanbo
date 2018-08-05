@@ -1,5 +1,5 @@
 <template lang="html">
-  <a-popover placement="bottom">
+  <a-popover placement="bottom" :auto-adjust-overflow="false">
     <slot />
     <img
       slot="content"
@@ -29,7 +29,6 @@ export default {
 
 <style lang="css">
   .card-popover {
-    transform: translateY(-50px);
     filter: drop-shadow(5px 5px 5px #ccc);
   }
 

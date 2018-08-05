@@ -17,8 +17,8 @@ export default async count => {
   }
 
   return () => {
-    const {value} = pickOne(factories)(database, count).next()
-    value.choices = pickSome(database.cards, count, value.criteria)
-    return value
+    const problem = pickOne(factories)(database)
+    problem.choices = pickSome(database.cards, count, problem.criteria)
+    return problem
   }
 }

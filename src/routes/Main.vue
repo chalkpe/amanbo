@@ -1,27 +1,49 @@
 <template lang="html">
   <div class="main">
-    <div v-if="problem" class="problem">
-      <h2>다음 중 {{ problem.question(answer) | eunneun }} 무엇인가요?</h2>
+    <div class="status">
+      <a-button
+        v-if="!problem"
+        type="primary" size="large"
+        @click="next">퀴이즈 시작하기</a-button>
 
-      <card-popover
-        v-for="card of problem.choices"
-        :key="card.id" :card="card">
+      <a-button
+        v-if="problem && !chosen"
+        size="large" type="dashed">{{ kill }}개 맞음 &middot; {{ death }}개 틀림
+      </a-button>
 
-        <a-button class="card">{{ problem.display(card) }}</a-button>
-      </card-popover>
+      <a-button
+        v-if="problem && chosen"
+        size="large" type="dashed"
+        @click="next">
+        {{ chosen === answer ? '맞았습니다' : '틀렸습니다' }} <a-icon type="right" />
+      </a-button>
     </div>
 
-    <a-divider />
+    <div v-if="problem" class="problem">
+      <a-divider />
+      <h2>다음 중 {{ problem.question(answer) | eunneun }} 무엇인가요?</h2>
 
-    <div class="kd">
-      {{ kill }}개 맞음 &middot; {{ death }}개 틀림
+      <span
+        v-for="card of problem.choices"
+        :key="card.id" class="card">
+
+        <a-button v-if="!chosen" @click="choose(card)">
+          {{ problem.display(card) }}
+        </a-button>
+
+        <card-popover v-else :card="card">
+          <a-button :class="btn(card)">
+            {{ problem.display(card) }}
+          </a-button>
+        </card-popover>
+      </span>
     </div>
   </div>
 </template>
 
 <script>
 import factory from '../factory'
-import random from '../util/random'
+import pickOne from '../util/pick-one'
 import postposition from '../util/postposition'
 import CardPopover from '../components/CardPopover.vue'
 
@@ -38,29 +60,40 @@ export default {
   data () {
     return {
       problem: null,
-      answerIndex: 0,
       factory: null,
 
       kill: 0,
-      death: 0
-    }
-  },
+      death: 0,
 
-  computed: {
-    answer () {
-      return this.problem.choices[this.answerIndex]
+      answer: null,
+      chosen: null
     }
   },
 
   async mounted () {
     this.factory = await factory(count)
-    this.next()
   },
 
   methods: {
     next () {
       this.problem = this.factory()
-      this.answerIndex = random(count)
+      this.answer = pickOne(this.problem.choices)
+      this.chosen = null
+    },
+
+    choose (card) {
+      this.chosen = card
+
+      this.kill += +(this.answer === this.chosen)
+      this.death += +(this.answer !== this.chosen)
+    },
+
+    btn (card) {
+      return {
+        green: this.answer === this.chosen && this.chosen === card,
+        blue: this.answer !== this.chosen && this.answer === card,
+        red: this.answer !== this.cosen && this.chosen === card
+      }
     }
   }
 }
@@ -69,5 +102,27 @@ export default {
 <style scoped>
   .card + .card {
     margin-left: 0.5rem;
+  }
+
+  .kd-summary {
+    padding-top: 1rem;
+  }
+
+  button.red {
+    color: #fff;
+    border-color: #ff4d4f;
+    background-color: #ff4d4f;
+  }
+
+  button.green {
+    color: #fff;
+    border-color: #23d160;
+    background-color: #23d160;
+  }
+
+  button.blue {
+    color: #fff;
+    border-color: #1890ff;
+    background-color: #1890ff;
   }
 </style>
