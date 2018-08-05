@@ -4,9 +4,10 @@
   "description": "Hearthstone quiz page",
   "main": "index.html",
   "scripts": {
-    "test": "eslint src/**/*.{js,vue}",
     "start": "parcel index.html",
-    "build": "parcel build index.html"
+    "build": "parcel build index.html",
+    "test": "eslint src/**/*.{js,vue} --fix",
+    "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup"
   },
   "repository": "https://github.com/ChalkPE/amanbo",
   "author": "Chalk <chalk@chalk.pe>",
