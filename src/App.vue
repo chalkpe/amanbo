@@ -19,7 +19,20 @@
     </a-layout-content>
 
     <a-layout-footer class="main__footer">
-      The source code is licensed under the <a href="https://github.com/ChalkPE/amanbo/blob/master/LICENSE">MIT License</a><br>
+      <a class="main__link" :href="pkg.repository">
+        <a-icon style="font-size: 2rem" type="github">.</a-icon>
+      </a>
+
+      <a class="main__link" :href="'https://twitter.com/intent/tweet?text=' + tweet">
+        <a-icon style="font-size: 2rem" type="twitter">.</a-icon>
+      </a>
+
+      <div class="main__version">
+        Amanbo v{{ pkg.version }}<br>
+        Original project: <a href="https://hasuin.github.io">hasuin.github.io</a>
+      </div>
+
+      The source code is licensed under the <a :href="license">MIT License</a><br>
       This website is not affiliated with Blizzard Entertainment<br>
       This website contains data that is copyright &copy; Blizzard Entertainment
     </a-layout-footer>
@@ -27,8 +40,16 @@
 </template>
 
 <script>
+import pkg from '../package.json'
+
 export default {
   name: 'App',
+
+  computed: {
+    pkg: () => pkg,
+    license: () => 'https://github.com/ChalkPE/amanbo/blob/master/LICENSE',
+    tweet: () => encodeURIComponent('하스스톤 퀴즈 하지 않을래...? https://chalkpe.github.io/amanbo')
+  },
 
   methods: {
     handleMenu ({ key }) {
@@ -58,5 +79,18 @@ export default {
 
   .main__footer {
     text-align: center;
+  }
+
+  .main__link {
+    color: #444;
+  }
+
+  .main__link + .main__link {
+    margin-left: 0.5rem;
+  }
+
+  .main__version {
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
   }
 </style>
