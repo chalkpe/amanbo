@@ -27,16 +27,18 @@
         v-for="card of problem.choices"
         :key="card.id" class="card">
 
-        <a-button v-if="!chosen" @click="choose(card)">
+        <a-button
+          :class="chosen && btn(card)"
+          @click="!chosen && choose(card)">
           {{ problem.display(card) }}
         </a-button>
-
-        <card-popover v-else :card="card">
-          <a-button :class="btn(card)">
-            {{ problem.display(card) }}
-          </a-button>
-        </card-popover>
       </span>
+    </div>
+
+    <div v-if="problem" class="cards">
+      <card
+        v-for="card of problem.choices" :key="card.id"
+        :card="card" :hidden="!chosen" />
     </div>
   </div>
 </template>
@@ -45,13 +47,14 @@
 import factory from '../factory'
 import pickOne from '../util/pick-one'
 import postposition from '../util/postposition'
-import CardPopover from '../components/CardPopover.vue'
+
+import Card from '../components/Card.vue'
 
 const count = 5
 
 export default {
   name: 'MainRoute',
-  components: { CardPopover },
+  components: { Card },
 
   filters: {
     eunneun: postposition('은는')
