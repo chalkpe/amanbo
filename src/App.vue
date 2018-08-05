@@ -2,18 +2,21 @@
   <a-layout class="main">
     <a-layout-header>
       <a-menu
-        theme="dark"
         mode="horizontal"
-        class="main__menu">
+        theme="dark" class="main__menu"
+        :default-selected-keys="[$route.name]"
+        @select="handleMenu">
 
-        <a-menu-item>문제 풀어보기</a-menu-item>
-        <a-menu-item>틀린 문제 복습하기</a-menu-item>
+        <a-menu-item key="MainRoute">문제 풀어보기</a-menu-item>
+        <a-menu-item key="ReviewRoute">틀린 카드 복습하기</a-menu-item>
       </a-menu>
     </a-layout-header>
 
     <a-layout-content class="main__content">
       <a-card>
-        <router-view />
+        <keep-alive>
+          <router-view />
+        </keep-alive>
       </a-card>
     </a-layout-content>
 
@@ -27,7 +30,13 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+
+  methods: {
+    handleMenu ({ key }) {
+      this.$router.push({ name: key })
+    }
+  }
 }
 </script>
 

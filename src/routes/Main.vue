@@ -45,20 +45,18 @@
 
 <script>
 import factory from '../factory'
+import storage from '../storage'
+
 import pickOne from '../util/pick-one'
 import postposition from '../util/postposition'
 
 import Card from '../components/Card.vue'
 
-const count = 5
-
 export default {
   name: 'MainRoute',
   components: { Card },
-
-  filters: {
-    eunneun: postposition('은는')
-  },
+  filters: { eunneun: postposition('은는') },
+  mixins: [storage],
 
   data () {
     return {
@@ -67,6 +65,8 @@ export default {
 
       kill: 0,
       death: 0,
+      review: [],
+      sync: ['kill', 'death', 'review'],
 
       answer: null,
       chosen: null
@@ -74,7 +74,7 @@ export default {
   },
 
   async mounted () {
-    this.factory = await factory(count)
+    this.factory = await factory(5)
   },
 
   methods: {
@@ -87,8 +87,11 @@ export default {
     choose (card) {
       this.chosen = card
 
-      this.kill += +(this.answer === this.chosen)
-      this.death += +(this.answer !== this.chosen)
+      if (this.answer === this.chosen) this.kill += 1
+      else {
+        this.death += 1
+        this.review.push(this.answer)
+      }
     },
 
     btn (card) {
