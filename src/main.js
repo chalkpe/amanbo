@@ -8,13 +8,12 @@ import routes from './routes'
 
 import Antd from 'ant-design-vue'
 import VueRouter from 'vue-router'
+import VueAnalytics from 'vue-analytics'
+
+const router = new VueRouter({ routes })
 
 Vue.use(Antd)
 Vue.use(VueRouter)
+Vue.use(VueAnalytics, {router, id: 'UA-123415597-1'})
 
-const app = new Vue({
-  render: h => h(App),
-  router: new VueRouter({ routes })
-})
-
-app.$mount('#app')
+new Vue({ render: h => h(App), router }).$mount('#app')
