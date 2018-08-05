@@ -36,6 +36,10 @@ export default {
     font-family: 'Noto Sans Korean', sans-serif;
   }
 
+  .main {
+    height: 100%;
+  }
+
   .main__menu {
     line-height: 64px;
   }

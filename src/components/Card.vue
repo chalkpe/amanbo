@@ -32,7 +32,8 @@ export default {
 
 <style lang="css" scoped>
   .card-popover {
-    width: 12vw;
+    width: 222px;
+    transform: translateY(-20px);
     filter: drop-shadow(5px 5px 5px #ccc);
   }
 </style>

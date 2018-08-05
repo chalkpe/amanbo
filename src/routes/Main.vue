@@ -1,5 +1,27 @@
 <template lang="html">
   <div class="main">
+    <div v-if="problem" class="problem">
+      <h2>다음 중 {{ problem.question(answer) | eunneun }} 무엇인가요?</h2>
+
+      <a-row type="flex" justify="center">
+        <a-col
+          v-for="card of problem.choices"
+          :key="card.id" class="card">
+
+          <card :card="card" :hidden="!chosen" />
+          <br>
+          <a-button
+            size="large"
+            :class="chosen && btn(card)"
+            @click="!chosen && choose(card)">
+            {{ problem.display(card) }}
+          </a-button>
+        </a-col>
+      </a-row>
+
+      <a-divider />
+    </div>
+
     <div class="status">
       <a-button
         v-if="!problem"
@@ -17,28 +39,6 @@
         @click="next">
         {{ chosen === answer ? '맞았습니다' : '틀렸습니다' }} <a-icon type="right" />
       </a-button>
-    </div>
-
-    <div v-if="problem" class="problem">
-      <a-divider />
-      <h2>다음 중 {{ problem.question(answer) | eunneun }} 무엇인가요?</h2>
-
-      <span
-        v-for="card of problem.choices"
-        :key="card.id" class="card">
-
-        <a-button
-          :class="chosen && btn(card)"
-          @click="!chosen && choose(card)">
-          {{ problem.display(card) }}
-        </a-button>
-      </span>
-    </div>
-
-    <div v-if="problem" class="cards">
-      <card
-        v-for="card of problem.choices" :key="card.id"
-        :card="card" :hidden="!chosen" />
     </div>
   </div>
 </template>
@@ -104,11 +104,7 @@ export default {
 
 <style scoped>
   .card + .card {
-    margin-left: 0.5rem;
-  }
-
-  .kd-summary {
-    padding-top: 1rem;
+    margin-left: 0.25rem;
   }
 
   button.red {
