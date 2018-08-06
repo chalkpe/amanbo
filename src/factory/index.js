@@ -2,13 +2,15 @@ import set from './set'
 import cost from './cost'
 import stat from './stat'
 import race from './race'
+import rarity from './rarity'
+import flavor from './flavor'
 
 import request from '../request'
 import pickOne from '../util/pick-one'
 import pickSome from '../util/pick-some'
 import { CARDS_JSON_URL as CARDS, STRINGS_JSON_URL as STRINGS } from '../config'
 
-const factories = [set, cost, stat, race]
+const factories = [set, cost, stat, race, rarity, flavor]
 
 export default async count => {
   const database = {
